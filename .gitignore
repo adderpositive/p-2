@@ -3,3 +3,4 @@
 request.rest
 public/*
 !public/index.html
+.vercel
