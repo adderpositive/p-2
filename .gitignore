@@ -1,0 +1,5 @@
+/node_modules
+/build
+request.rest
+public/*
+!public/index.html
