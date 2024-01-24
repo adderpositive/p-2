@@ -10,7 +10,8 @@ app.use(express.text())
 app.use(express.static(path.join(__dirname, '../public')))
 app.use(cors())
 
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
+  // in npm run dev should be localhost of react app
   return res.send('index.html')
 })
 
