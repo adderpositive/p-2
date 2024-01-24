@@ -2,7 +2,8 @@ import React, { FormEvent, useState } from 'react'
 
 const App = () => {
   const [input, setInput] = useState(0)
-  const [result, setResult] = useState<number | null>(null)
+  const [result, setResult] = useState<string | null>(null)
+  const [status, setStatus] = useState<number | null>(null)
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -12,9 +13,8 @@ const App = () => {
     })
     const responseText = await response.text()
 
-    if (response.status !== 200 || isNaN(Number(responseText))) return
-
-    setResult(Number(responseText))
+    setStatus(response.status)
+    setResult(responseText)
   }
 
   return (
@@ -26,12 +26,15 @@ const App = () => {
           const value = e.target.value
           const number = Number(value)
 
-          if (!isNaN(number) && number >= 0) {
-            setInput(number)
-          }
+          // here can more validation
+          setInput(number)
         }}
       />
-      {result !== null && <p>Result: {result}</p>}
+      {result !== null && (
+        <p style={{ color: status === 200 ? 'green' : 'red' }}>
+          Result: {result}
+        </p>
+      )}
       <button type='submit'>Calculate</button>
     </form>
   )

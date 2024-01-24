@@ -21,12 +21,12 @@ app.post('/', (req, res) => {
       : null
 
   if (input === null || input < 0) {
-    return res.send('Not valid input')
+    return res.status(400).send('Not valid input')
   }
 
   const fibonacciNumber = getFibonacciNumber(input)
 
-  return res.send(fibonacciNumber.toString())
+  return res.status(200).send(fibonacciNumber.toString())
 })
 
 app.listen(port, () => {
