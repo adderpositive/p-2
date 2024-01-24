@@ -1,6 +1,7 @@
 import cors from 'cors'
 import express from 'express'
 import path from 'path'
+import getFibonacciNumber from './lib/getFibonacciNumber'
 
 const app = express()
 const port = 3000
@@ -14,9 +15,18 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-  const input = req.query.input
+  const input =
+    req.query.input && typeof req.query.input === 'string'
+      ? parseInt(req.query.input, 10)
+      : null
 
-  return res.send(input)
+  if (input === null || input < 0) {
+    return res.send('Not valid input')
+  }
+
+  const fibonacciNumber = getFibonacciNumber(input)
+
+  return res.send(fibonacciNumber.toString())
 })
 
 app.listen(port, () => {
