@@ -8,7 +8,7 @@ export const fibonacciController = (req: Request, res: Response) => {
       : null
 
   if (input === null || input < 0) {
-    return res.status(400).send('Not valid input')
+    return res.status(422).send('Not valid input')
   }
 
   const fibonacciNumber = getFibonacciNumber(input)
